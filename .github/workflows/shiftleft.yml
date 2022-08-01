@@ -39,13 +39,13 @@ jobs:
       env:
         SHIFTLEFT_ACCESS_TOKEN: ${{ secrets.SHIFTLEFT_ACCESS_TOKEN }}
         
-    - name: Create status check
+    - name: Validate Build Rules
       run: |
-        sh shiftleft-pr-check.sh
+        ${GITHUB_WORKSPACE}/sl check-analysis --v2 --app log4shell-vulnerable-app \
+            --report \
+            --github-pr-number=${{github.event.number}} \
+            --github-pr-user=${{ github.repository_owner }} \
+            --github-pr-repo=${{ github.event.repository.name }} \
+            --github-token=${{ secrets.GITHUB_TOKEN }}
       env:
-        GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
-        GITHUB_REPO: "${{ github.repository }}"
-        GITHUB_SHA: "${{ github.sha }}"
-        GITHUB_REF: "${{ github.ref }}"
-        SHIFTLEFT_ORG_ID: ${{ secrets.SHIFTLEFT_ORG_ID }}
-        SHIFTLEFT_API_TOKEN: ${{ secrets.SHIFTLEFT_API_TOKEN }}
+        SHIFTLEFT_ACCESS_TOKEN: ${{ secrets.SHIFTLEFT_ACCESS_TOKEN }}
