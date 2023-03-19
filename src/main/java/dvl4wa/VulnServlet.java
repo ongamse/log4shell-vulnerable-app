@@ -20,10 +20,10 @@ public class VulnServlet extends HttpServlet {
       if(headers.containsKey("x-log")) {
         writer.write("Logging to console using vulnerable log4j2!\n");
 
-       Log user supplied value without validation
+       //Log user supplied value without validation
        logger.info(headers.get("x-log"));
 
-       Log static text
+       //Log static text
        logger.info("Header contains value for x-log");
         writer.write("Logging to console using vulnerable log4j2!\n");     
       } else {
