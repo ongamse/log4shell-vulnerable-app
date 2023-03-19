@@ -24,8 +24,8 @@ public class VulnServlet extends HttpServlet {
        logger.info(headers.get("x-log"));
 
        //Log static text
-       logger.info("Header contains value for x-log");
-        writer.write("Logging to console using vulnerable log4j2!\n");     
+       //logger.info("Header contains value for x-log");
+        //writer.write("Logging to console using vulnerable log4j2!\n");     
       } else {
         writer.write("Hello world\n");
       }
