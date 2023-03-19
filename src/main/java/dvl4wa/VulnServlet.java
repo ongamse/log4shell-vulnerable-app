@@ -7,12 +7,12 @@ import java.io.Writer;
 import java.util.Map;
 import java.util.Collections;
 import java.util.stream.Collectors;
-//import org.apache.logging.log4j.Logger;
-//import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
 
 public class VulnServlet extends HttpServlet {
   protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException {
-    //Logger logger = LogManager.getLogger(VulnServlet.class);
+    Logger logger = LogManager.getLogger(VulnServlet.class);
     try {
       Map<String, String> headers = Collections.list(req.getHeaderNames()).stream().collect(Collectors.toMap(h -> h, req::getHeader));
       res.setContentType("text/plain; charset=utf-8");
@@ -20,11 +20,11 @@ public class VulnServlet extends HttpServlet {
       if(headers.containsKey("x-log")) {
         writer.write("Logging to console using vulnerable log4j2!\n");
 
-        // Log user supplied value without validation
-        // logger.info(headers.get("x-log"));
+       Log user supplied value without validation
+       logger.info(headers.get("x-log"));
 
-        // Log static text
-        // logger.info("Header contains value for x-log");
+       Log static text
+       logger.info("Header contains value for x-log");
         writer.write("Logging to console using vulnerable log4j2!\n");     
       } else {
         writer.write("Hello world\n");
