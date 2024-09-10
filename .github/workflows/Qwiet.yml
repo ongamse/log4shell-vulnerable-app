@@ -21,7 +21,7 @@ jobs:
       with:
         java-version: 11.0.x
     - name: Build and package with Gradle
-      run: ./gradlew shadowJar
+      run: ./gradlew build
     - name: Download ShiftLeft CLI
       run: |
         curl https://cdn.shiftleft.io/download/sl > ${GITHUB_WORKSPACE}/sl && chmod a+rx ${GITHUB_WORKSPACE}/sl
@@ -35,7 +35,7 @@ jobs:
       run: echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
       id: extract_branch
     - name: NextGen Static Analysis
-      run: ${GITHUB_WORKSPACE}/sl analyze --wait --app log4shell-vulnerable-app2 --tag branch=${{ github.head_ref || steps.extract_branch.outputs.branch }} --java --cpg ./build/libs/log4shell-vulnerable-app-all.jar
+      run: ${GITHUB_WORKSPACE}/sl analyze --wait --app log4shell --tag branch=${{ github.head_ref || steps.extract_branch.outputs.branch }} --javasrc .
       env:
         SHIFTLEFT_ACCESS_TOKEN: ${{ secrets.SHIFTLEFT_ACCESS_TOKEN }}
         
